@@ -52,6 +52,7 @@ inventory = ./hosts
 host_key_checking = False
 pipelining = True
 roles_path = ./roles
+defaults.force_color = True
 forks = 2
 #callbacks_enabled = timer, profile_tasks, profile_roles
 [ssh_connection]
@@ -211,4 +212,4 @@ EOF
 sudo chown -R vagrant:vagrant /home/vagrant/*
 [ $? -eq 0 ] && \
 log_info "${GREEN} *** RUNNING SAMPLE PLAYBOOK TO GET UPTIME FROM ALL THE SERVERS *** ${CLEAR}" && \
-ansible-playbook $PLAY_BOOK
+ANSIBLE_FORCE_COLOR=True ansible-playbook $PLAY_BOOK
