@@ -190,7 +190,6 @@ do
 sleep 10
 if [[  $(sudo lxc ls -c ns --format csv ansible-client-$count |grep RUNNING|cut -f1 -d,|wc -l) -ge 1 ]];then
 log_info "${GREEN} Copying Script in ansible-client-$count Server - Please Wait.. ${CLEAR}"
-echo -e "\n"
 sudo lxc exec ansible-client-$count -- useradd vagrant </dev/null
 [ $? -eq 0 ] && sudo lxc file push /tmp/config.sh ansible-client-$count/tmp/ </dev/null && run_script ansible-client-$count
 IP_ADDR=$(sudo lxc ls -c ns4 --format csv ansible-client-$count |cut -d, -f3|cut -d' ' -f1)
