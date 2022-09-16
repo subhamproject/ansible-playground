@@ -82,7 +82,6 @@ cat > $PLAY_BOOK << EOF
       - vim
       - git
       - curl
-
 EOF
 
 cat > $CONFIG << EOF
