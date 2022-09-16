@@ -1,5 +1,9 @@
 # ansible-playground
 
+
+** PLEASE INSTALL VAGRANT AND VIRTUAL BOX IN YOUR LAPTOP BEFORE USING THIS VAGRANT FILE AND CONFIG TO START ANSIBLE PLAYGROUP **
+
+
 ** TO Start VM **
 
 1 - git clone \<this repo\>
