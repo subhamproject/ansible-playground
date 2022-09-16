@@ -66,7 +66,7 @@
          In that case the ansible hosts file which was created during provisioning would have to be updated with the current IP address of Containers -
          lxc list --> get the current IP from running container and update the hosts file
          
-         update the - /etc/hosts
+         update the - /home/vagrant/hosts
   
   
   ** NOTE LXC container is similar to full blown VM - it is not like docker container - Each VM has it own kernel **
