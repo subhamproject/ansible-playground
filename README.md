@@ -14,6 +14,7 @@
 2 - vagrant up
   
 3 - vagrant ssh
+
   
   ** You will see all ansible config present in /home/vagrant/  path **
   
@@ -29,6 +30,8 @@
   lxc list --> To get all the containers
   
   lxc exec \<containername\> bash --> to login to container
+  
+  lxc start \<containername\> --> to start a stopped container
   
   
   ** ANSIBLE HOST FILE CAN BE FOUND UNDER THIS PATH **
