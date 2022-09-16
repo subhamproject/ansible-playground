@@ -165,7 +165,7 @@ done
 
 function run_script() {
 server=$1
-log_info "${GREEN} Adding ansible user to $server.. ${CLEAR}"
+log_info "${GREEN} Adding ansible user to $server server - Please Wait.. ${CLEAR}"
 sudo lxc exec $server -- bash /tmp/config.sh  </dev/null
 echo " OK!"
 }
