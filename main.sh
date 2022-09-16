@@ -74,6 +74,15 @@ cat > $PLAY_BOOK << EOF
     register: output
   - debug:
        msg: "Uptime of server {{ inventory_hostname }} is {{ output.stdout }}"
+  - name: Installing Packages
+    package:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - vim
+      - git
+      - curl
+
 EOF
 
 cat > $CONFIG << EOF
@@ -130,8 +139,8 @@ select_random() {
 }
 
 
-#image_list=("ubuntu:18.04" "ubuntu:20.04" "ubuntu:22.04" "images:centos/7")
-image_list=("ubuntu:20.04" "ubuntu:20.04" "ubuntu:20.04" "ubuntu:20.04")
+image_list=("ubuntu:18.04" "ubuntu:20.04" "ubuntu:22.04" "ubuntu:20.04")
+#image_list=("ubuntu:20.04" "ubuntu:20.04" "ubuntu:20.04" "ubuntu:20.04")
 #images:centos/7
 
 function spin_server() {
@@ -143,7 +152,7 @@ done
 log_info "*** ${GREEN} PLEASE WAIT SPINNING UP ALL THE SERVERS MAY TAKE A WHILE *** ${CLEAR}"
 echo -e "\n"
 sleep 60
-for count in {1..4}
+for count in {1..10}
 do
 sleep 15
 image=$(select_random "${image_list[@]}")
@@ -176,15 +185,19 @@ echo " OK!"
 }
 
 function copy_script() {
-for count in {1..4}
+for count in {1..10}
 do
-wait_for_server ansible-client-$count
+#wait_for_server ansible-client-$count
 sleep 10
+if [[  $(sudo lxc ls -c ns --format csv ansible-client-$count |grep RUNNING|cut -f1 -d,|wc -l) -ge 1 ]];then
 log_info "${GREEN} Copying Script in ansible-client-$count Server - Please Wait.. ${CLEAR}"
 echo -e "\n"
 sudo lxc exec ansible-client-$count -- useradd vagrant </dev/null
 [ $? -eq 0 ] && sudo lxc file push /tmp/config.sh ansible-client-$count/tmp/ </dev/null && run_script ansible-client-$count
+IP_ADDR=$(sudo lxc ls -c ns4 --format csv ansible-client-$count |cut -d, -f3|cut -d' ' -f1)
+sudo echo -e "$IP_ADDR" >> $HOST_FILE
 echo " OK!"
+fi
 done
 }
 
