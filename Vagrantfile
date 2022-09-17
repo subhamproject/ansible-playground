@@ -1,5 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+#https://gist.github.com/louisdorard/6095624
 
 ENV['VAGRANT_NO_PARALLEL'] = 'yes'
 
@@ -19,6 +20,7 @@ Vagrant.configure(2) do |config|
     config.vm.define "ansible-server" do |node|
       node.vm.box = "bento/ubuntu-22.04"
       node.vm.hostname = "ansible.example.com"
+	    node.vm.network :forwarded_port, guest: 8080,host: 80
 	  node.vm.provision "file", source: "main.sh", destination: "/tmp/main.sh"
 	  node.vm.provision "file", source: "config.sh", destination: "/tmp/config.sh"
 	  node.vm.provision "shell",privileged: true, inline: $COMMANDS
