@@ -91,6 +91,9 @@ cat > $CONFIG << EOF
     - config:
              ipv4.address: auto
              ipv6.address: auto
+             limits.memory: 2048MB                                    
+             limits.memory.enforce: soft
+             limits.cpu: 2
       description: "Custom Profile for Ansible Client Machine"
       managed: false
       name: lxdbr0
