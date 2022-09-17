@@ -20,10 +20,10 @@ Vagrant.configure(2) do |config|
     config.vm.define "ansible-server" do |node|
       node.vm.box = "bento/ubuntu-22.04"
       node.vm.hostname = "ansible.example.com"
-	    node.vm.network :forwarded_port, guest: 8080,host: 80
-	  node.vm.provision "file", source: "main.sh", destination: "/tmp/main.sh"
-	  node.vm.provision "file", source: "config.sh", destination: "/tmp/config.sh"
-	  node.vm.provision "shell",privileged: true, inline: $COMMANDS
+      node.vm.network :forwarded_port, guest: 8080,host: 80
+      node.vm.provision "file", source: "main.sh", destination: "/tmp/main.sh"
+      node.vm.provision "file", source: "config.sh", destination: "/tmp/config.sh"
+      node.vm.provision "shell",privileged: true, inline: $COMMANDS
       node.vm.provision :shell, privileged: true, :inline => "bash /tmp/main.sh"
       node.vm.network "private_network", ip: "10.10.100.11#{i}"
       node.vm.provider "virtualbox" do |v|
