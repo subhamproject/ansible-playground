@@ -86,7 +86,7 @@ cat > $PLAY_BOOK << EOF
 EOF
 
 cat > $CONFIG << EOF
-     config: {}
+    config: {}
     networks:
     - config:
              ipv4.address: auto
@@ -101,12 +101,7 @@ cat > $CONFIG << EOF
       name: default
       driver: dir
     profiles:
-    - config:
-         security.nesting: "true"
-         security.privileged: "true"
-         limits.memory: 2048MB
-         limits.memory.enforce: soft
-         limits.cpu: "2"
+    - config: {}
       description: "Custom Profile for Ansible Client Machine"
       devices:
               eth0:
@@ -121,6 +116,7 @@ cat > $CONFIG << EOF
       name: default
     cluster: null
 EOF
+
 sudo chmod +x $CONFIG
 echo " OK!"
 
