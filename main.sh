@@ -86,14 +86,11 @@ cat > $PLAY_BOOK << EOF
 EOF
 
 cat > $CONFIG << EOF
-    config: {}
+     config: {}
     networks:
     - config:
              ipv4.address: auto
              ipv6.address: auto
-             limits.memory: 2048MB                                    
-             limits.memory.enforce: soft
-             limits.cpu: 2
       description: "Custom Profile for Ansible Client Machine"
       managed: false
       name: lxdbr0
@@ -104,7 +101,12 @@ cat > $CONFIG << EOF
       name: default
       driver: dir
     profiles:
-    - config: {}
+    - config:
+         security.nesting: "true"
+         security.privileged: "true"
+         limits.memory: 2048MB
+         limits.memory.enforce: soft
+         limits.cpu: "2"
       description: "Custom Profile for Ansible Client Machine"
       devices:
               eth0:
